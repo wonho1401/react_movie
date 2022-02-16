@@ -1,6 +1,5 @@
 import { Row } from "antd";
 import React, { useEffect, useState } from "react";
-import { FaCode } from "react-icons/fa";
 import { API_KEY, API_URL, IMAGE_BASE_URL } from "../../Config";
 import GridCard from "../commons/GridCard";
 import MainImage from "./Sections/MainImage";
@@ -10,15 +9,18 @@ function LandingPage() {
   const [MainMovieImage, setMainMovieImage] = useState(null);
   const [CurrentPage, setCurrentPage] = useState(0);
 
+  //페이지 로드하자마자 일어나는 함수
   useEffect(() => {
     const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko-KR&page=1`;
     fetchMovies(endpoint);
   }, []);
 
   const fetchMovies = (endpoint) => {
+    //fetch로 API 호출하는 것. then => 성공했을 때 ~ , catch => 실패했을 때 ~
     fetch(endpoint)
       .then((response) => response.json())
       .then((response) => {
+        console.log(response);
         console.log(response.results);
         setMovies([...Movies, ...response.results]);
         if (CurrentPage === 0) {
@@ -53,6 +55,7 @@ function LandingPage() {
         <Row gutter={[16, 16]}>
           {Movies &&
             Movies.map((movie, index) => (
+              //React.Fragment는 map을 사용해서 여러가지 컴포넌트를 만들때 간결하게 해줌.
               <React.Fragment key={index}>
                 <GridCard
                   image={
