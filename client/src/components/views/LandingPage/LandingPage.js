@@ -15,9 +15,9 @@ function LandingPage() {
     fetchMovies(endpoint);
   }, []);
 
-  const fetchMovies = (endpoint) => {
+  const fetchMovies = async (endpoint) => {
     //fetch로 API 호출하는 것. then => 성공했을 때 ~ , catch => 실패했을 때 ~
-    fetch(endpoint)
+    await fetch(endpoint)
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
