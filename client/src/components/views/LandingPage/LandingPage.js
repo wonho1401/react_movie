@@ -58,6 +58,7 @@ function LandingPage() {
               //React.Fragment는 map을 사용해서 여러가지 컴포넌트를 만들때 간결하게 해줌.
               <React.Fragment key={index}>
                 <GridCard
+                  landingpage
                   image={
                     movie.poster_path
                       ? `${IMAGE_BASE_URL}w500${movie.poster_path}`
