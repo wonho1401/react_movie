@@ -28,4 +28,23 @@ router.post("/liked", (req, res) => {
   );
 });
 
+router.post("/removeFromLike", (req, res) => {
+  Like.findOneAndDelete({
+    movieId: req.body.movieId,
+    userFrom: req.body.userFrom,
+  }).exec((err, doc) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).json({ success: true, doc });
+  });
+});
+
+router.post("/addToLike", (req, res) => {
+  const like = new Like(req.body);
+
+  like.save((err, doc) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).json({ success: true });
+  });
+});
+
 module.exports = router;

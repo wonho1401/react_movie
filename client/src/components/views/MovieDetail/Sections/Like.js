@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import { Button } from "antd";
 
 function Like(props) {
   const movieId = props.movieId;
@@ -11,11 +12,14 @@ function Like(props) {
   const [LikeNumber, setLikeNumber] = useState(0);
   const [Liked, setLiked] = useState(false);
 
+  let variables = {
+    userFrom,
+    movieId,
+    movieTitle,
+    moviePost,
+    movieRunTime,
+  };
   useEffect(() => {
-    let variables = {
-      userFrom,
-      movieId,
-    };
     //서버에 like 정보를 요청해서 가져와야함.
     //방법이 여러가지 -> 1. fetch   2. axios
     Axios.post("/api/like/likeNumber", variables).then((response) => {
@@ -35,11 +39,33 @@ function Like(props) {
     });
   }, []);
 
+  const onClickLike = () => {
+    if (Liked) {
+      Axios.post("/api/like/removeFromLike", variables).then((response) => {
+        if (response.data.success) {
+          setLikeNumber(LikeNumber - 1);
+          setLiked(!Liked);
+        } else {
+          alert("Like 리스트에서 지우는데에 실패했습니다.");
+        }
+      });
+    } else {
+      Axios.post("/api/like/addToLike", variables).then((response) => {
+        if (response.data.success) {
+          setLikeNumber(LikeNumber + 1);
+          setLiked(!Liked);
+        } else {
+          alert("Like 리스트에서 추가하는데에 실패했습니다.");
+        }
+      });
+    }
+  };
+
   return (
     <div>
-      <button>
+      <Button onClick={onClickLike}>
         {Liked ? "Unlike" : "Like"} {LikeNumber}
-      </button>
+      </Button>
     </div>
   );
 }
