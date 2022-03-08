@@ -47,4 +47,11 @@ router.post("/addToLike", (req, res) => {
   });
 });
 
+router.post("/getLikedMovie", (req, res) => {
+  Like.find({ userFrom: req.body.userFrom }).exec((err, likes) => {
+    if (err) return res.status(400).send(err);
+    return res.status(200).json({ success: true, likes });
+  });
+});
+
 module.exports = router;
