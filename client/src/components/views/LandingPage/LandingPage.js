@@ -1,4 +1,4 @@
-import { Row } from "antd";
+import { Row, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { API_KEY, API_URL, IMAGE_BASE_URL } from "../../Config";
 import GridCard from "../commons/GridCard";
@@ -73,7 +73,7 @@ function LandingPage() {
       </div>
 
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <button onClick={loadMoreItems}>Load More</button>
+        <Button onClick={loadMoreItems}>Load More</Button>
       </div>
     </div>
   );

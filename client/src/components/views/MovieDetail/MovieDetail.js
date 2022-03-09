@@ -3,7 +3,7 @@ import { API_KEY, API_URL, IMAGE_BASE_URL } from "../../Config";
 import MainImage from "../LandingPage/Sections/MainImage";
 import MovieInfo from "./Sections/MovieInfo";
 import GridCard from "../commons/GridCard";
-import { Row } from "antd";
+import { Row, Button } from "antd";
 import Like from "./Sections/Like";
 
 function MovieDetail(props) {
@@ -65,7 +65,7 @@ function MovieDetail(props) {
         <div
           style={{ display: "flex", justifyContent: "center", margin: "2rem" }}
         >
-          <button onClick={toggleActorView}>Toggle Actor View</button>
+          <Button onClick={toggleActorView}>Toggle Actor View</Button>
         </div>
 
         {ActorToggle && (
